@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Eats</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='restaurant_dash.css')}}"
+    />
+    <link
+  </head>
+  <body>
+    <section id="page">
+      <header>
+        <div class="head_contain">
+          <div class="title"><h2>My Eats</h2></div>
+          <div>
+            Welcome, {{restaurant.restaurant_name}}
+            <a href="/restaurants/profile/{{restaurant.id}}">Profile Page</a>
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+      </header>
+      <nav>
+        <div class="user_post">
+          <div style="padding: 0.5em">
+            <img src="../static/images/kelvin.jpg" alt="user_image" />
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                padding: 0.5em;
+              "
+            >
+              <h4>User Name</h4>
+              <h5>Date</h5>
+            </div>
+            <div id="post_content">
+              <p>
+                Posts Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Amet, mollitia.
+              </p>
+            </div>
+
+            <div style="margin: 0.25em 1em">
+              <div id="options">
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  data-toggle="modal"
+                  data-target="#postResponseleModal"
+                  style="
+                    width: 100%;
+                    border-radius: 25px 25px 25px 25px;
+                    cursor: pointer;
+                  "
+                >
+                  Respond
+                </button>
+                <!-- modal to respond to post -->
+                <div
+                  class="modal fade"
+                  id="postResponseleModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                          Respond to (users post)
+                        </h5>
+                      </div>
+                      <div class="modal-body">
+                        <!-- form to respond to post -->
+                        <form action="">
+                          <textarea
+                            name="content"
+                            cols="30"
+                            rows="4"
+                            placeholder="comment"
+                            style="width: 100%"
+                          ></textarea>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <section>
+        <h5>RESTAURANT INFO HERE</h5>
+      </section>
+      <main>
+        <h3 style="text-align: center; margin-top: 0.5em">Featured Menu</h3>
+        <div style="padding: 1em; display: flex; align-items: center">
+          <div id="feature_items">
+            <div class="item" style="display: flex; flex-direction: column">
+              <img
+                src="https://cdn.britannica.com/s:800x1000/08/177308-050-94D9D6BE/Food-Pizza-Basil-Tomato.jpg"
+                alt="menu_item"
+              />
+              <a style="text-align: center; margin-top: 0.5em" href=""
+                >delete item</a
+              >
+            </div>
+            <div class="item" style="display: flex; flex-direction: column">
+              <img
+                src="https://cdn.britannica.com/s:800x1000/08/177308-050-94D9D6BE/Food-Pizza-Basil-Tomato.jpg"
+                alt="menu_item"
+              />
+              <a style="text-align: center; margin-top: 0.5em" href=""
+                >delete item</a
+              >
+            </div>
+
+            <div class="item" style="display: flex; flex-direction: column">
+              <img
+                src="https://cdn.britannica.com/s:800x1000/08/177308-050-94D9D6BE/Food-Pizza-Basil-Tomato.jpg"
+                alt="menu_item"
+              />
+              <a style="text-align: center; margin-top: 0.5em" href=""
+                >delete item</a
+              >
+            </div>
+
+            <div
+              style="
+                width: 160px;
+                height: 160px;
+                display: flex;
+                align-self: center;
+                justify-content: center;
+              "
+            >
+              <button
+                data-toggle="modal"
+                data-target="#addFeatureItemModal"
+                class="btn-primary add_item_btn"
+              >
+                Add Item
+              </button>
+              <!-- Modal for menu item uplaod -->
+              <div
+                class="modal fade"
+                id="addFeatureItemModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Upload Menu Item
+                      </h5>
+                    </div>
+                    <div class="modal-body">
+                      <!-- form to upload menu item -->
+                      <form action="/restaurants/uploader" method = "POST" enctype = "multipart/form-data" id = "restaurant_upload">
+                        <input type="file" name = 'image'/>
+                        <label for="name">file name:</label>
+                        <input type = 'text' name = 'name'/>
+                        <label for="description">Description:</label>
+                        <input type = 'text' name = 'description'/>
+                        <input type="submit" value='Upload'/>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="menu">
+            <img
+              src="http://unblast.com/wp-content/uploads/2019/08/Restaurant-Menu-Template-2.jpg"
+              alt="menu"
+            />
+            <a style="text-align: center; margin-top: -0.5em" href=""
+              >delete menu</a
+            >
+            <button
+              data-toggle="modal"
+              data-target="#addMenuModal"
+              class="btn btn-primary"
+              style="max-width: 160px; align-self: center; margin-top: 0.5em"
+            >
+              Add Menu
+            </button>
+            <!-- Modal for menu uplaod -->
+            <div
+              class="modal fade"
+              id="addMenuModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Upload Menu
+                    </h5>
+                  </div>
+                  <div class="modal-body">
+                    <!-- form to upload menu -->
+                    <form action="/restaurants/uploader">
+                      <input type="file" />
+
+                      <input type="submit" value='Upload'>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

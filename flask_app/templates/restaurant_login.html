@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+    <title>My Eats - Restaurant Login</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1 class="text-left" style="color: white">My Eats</h1>
+        {{flash_error}}
+        <div class="forms">
+            <div class="reg_form">
+                <div class="error_message_reg">
+                    {% with messages =
+                    get_flashed_messages() %} {% if messages %} {% for message in
+                    messages %}
+                    <p class="error">{{message}}</p>
+                    {% endfor %} {% endif %} {% endwith %}
+                </div>
+                <br />
+                <form class="form-signin mt-5" action="/restaurants/create" method="POST">
+                    <h2 class="mb-3 mx-2 fw-normal" style="color: white">Register</h2>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Restaurant Name"
+                            name="restaurant_name" />
+                        <label for="floatingInput">Restaurant Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="City"
+                            name="restaurant_city" />
+                        <label for="floatingInput">City</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="State"
+                            name="restaurant_state" />
+                        <label for="floatingInput">State</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Street"
+                            name="restaurant_street" />
+                        <label for="floatingInput">Street</label>
+                    </div>
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingInput" name="restaurant_cuisine">
+                            <option selected>Select a Cuisine Type</option>
+                            <option value="American">American</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Indian">Indian</option>
+                        </select>
+                        <label for="floatingInput">Cuisine</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="Email"
+                            name="restaurant_email" />
+                        <label for="floatingInput">Email</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingInput" placeholder="Password"
+                            name="restaurant_password" />
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingInput" placeholder="password"
+                            name="password_confirm" />
+                        <label for="floatingPassword">Password Confirmation</label>
+                    </div>
+                    <br />
+                    <button class="w-100 btn btn-lg btn-primary my-1" type="submit" name="reg_btn" value="register">
+                        Register
+                    </button>
+                </form>
+                <br>
+                <a href="/">Login/Register A User</a>
+            </div>
+            <div class="login_form">
+                <br />
+                <div class="error_message_signin">
+                    {% with messages =
+                    get_flashed_messages() %} {% if messages %} {% for message in
+                    messages %}
+                    <p class="error">{{message}}</p>
+                    {% endfor %} {% endif %} {% endwith %}
+                </div>
+                <form class="form-signin mt-5" action="/restaurants/login" method="POST">
+                    <h2 class="mb-3 mx-2 fw-normal" style="color: white">Sign in</h2>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            name="restaurant_email" />
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingInput" placeholder="Password"
+                            name="restaurant_password" />
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary mt-1 mb-2" type="submit">
+                        Sign in
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

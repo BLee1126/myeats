@@ -1,0 +1,24 @@
+Dashboard:
+Need user name for "Hungry, {user_first_name}?"
+need session user id. 
+need list of people followed.
+need list of suggestions
+
+need to be able to filter restaurant list based on food type
+
+restaurant list:
+filter list by following review count?
+need name of restaurant, image, description based on review count
+
+filter list by city<state.
+need name of restaurant, image, description based on location
+
+On click, need to get information about a specific restaurant.
+restaurant upload, restaurant user_first_name
+form to upload a new comment and/or upload.
+
+
+
+
+
+

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Eats</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='dashboard.css')}}"
+    />
+    <link
+  </head>
+  <body>
+    <section id="page">
+      <header>
+        <div class="head_contain">
+          <div class="title"><h2>My Eats</h2></div>
+          <div>
+            Hungry, {{user.first_name}}?
+
+            <a href="/users/profile">Profile</a>
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- FRIENDS LIST -->
+
+      <nav>
+        <h4 style="text-align: center; margin-top: 1em">Following</h4>
+        <!-- loop through list of who the user is following -->
+        {% for friend in friends %}
+
+        <div id="friends">
+          <div style="display: flex">
+            <img src="../static/images/user_icon.png" alt="friend-image" />
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <h5>{{friend.first_name}} {{friend.last_name}}</h5>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <a href="/users/profile/{{friend.id}}">Visit Page</a>
+          </div>
+        </div>
+
+        {% endfor %}
+
+        <hr />
+
+        <h4 style="text-align: center; margin-top: 1em">
+          Suggested connections
+        </h4>
+        <!-- loop through all users -->
+        {% for other_user in other_users %} {% if other_user.id !=
+        session['user_id'] and other_user not in friends %}
+        <div id="friends">
+          <img src="../static/images/user_icon.png" alt="user_icon" />
+          <h5>{{other_user.first_name}} {{other_user.last_name}}</h5>
+          <a href="/users/follow/{{other_user.id}}">follow</a>
+        </div>
+        {% endif %} {% endfor %}
+      </nav>
+      <!-- FOODS CATEGORIES -->
+      <section>
+        <div id="categories">
+          <div class="food_item">
+            <a href="/restaurants/category/{{'American'}}">
+              <div>
+                <img
+                  src="../static/images/American.jpg"
+                  alt="American Food"
+                  width="160"
+                  height="160"
+                />
+              </div>
+              <div class="food_title"><p>American</p></div>
+            </a>
+          </div>
+          <div class="food_item">
+            <a href="/restaurants/category/{{'Italian'}}">
+              <div>
+                <img
+                  src="../static/images/Italian.jpg"
+                  alt="Italian Food"
+                  width="160"
+                  height="160"
+                />
+              </div>
+              <div class="food_title">Italian</div>
+            </a>
+          </div>
+          <div class="food_item">
+            <a href="/restaurants/category/{{'Japanese'}}">
+              <div class="img_contain">
+                <img
+                  src="../static/images/Japanese.jpg"
+                  alt="Japanese Food"
+                  width="160"
+                  height="160"
+                />
+              </div>
+              <div class="food_title">Japanese</div>
+            </a>
+          </div>
+          <div class="food_item">
+            <a href="/restaurants/category/{{'Mexican'}}">
+              <div>
+                <img
+                  src="../static/images/Mexican.jpg"
+                  alt="Mexican Food"
+                  width="160"
+                  height="160"
+                />
+              </div>
+              <div class="food_title">Mexican</div>
+            </a>
+          </div>
+          <div class="food_item">
+            <a href="/restaurants/category/{{'Indian'}}">
+              <div>
+                <img
+                  src="../static/images/Indian.jpg"
+                  alt="Indian Food"
+                  width="160"
+                  height="160"
+                />
+              </div>
+              <div class="food_title">Indian</div>
+            </a>
+          </div>
+        </div>
+      </section>
+      <main>
+        <!-- <div id="options">
+          Options: <a href="">Recommendations</a> <a href="">My Eats</a>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Post
+          </button>
+
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Post a review!
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="">
+                    <input type="file" name="user_upload" />
+                    <br />
+                    <textarea name="content" id="" cols="30" rows="4">
+Comments</textarea
+                    >
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div id="options">
+          <!-- Favorites button commented out until favorite feature is working -->
+          <!-- <div>
+            <a href="/restaurants/category" class="btn btn-primary" onclick="showFavorites()">Favorites</a>
+          </div> -->
+          <div>
+            <a href="/restaurants/category" class="btn btn-primary" onclick="showRestaurants()">All Restaurants</a>
+          </div>
+        </div>
+
+        <div class="restaurants_container">
+          <!-- loop through all restaurants in database -->
+          <div id="restaurants">
+            {% if session['category'] %}
+              {% for restaurant in restaurants if restaurant.restaurant_cuisine == session['category'] %}
+                <div class="restaurants_card">
+                  <a
+                    style="color: black; text-decoration: none"
+                    href="/restaurants/profile/{{restaurant.id}}"
+                  >
+                    <div id="restaurant">
+                      <h5>{{restaurant.restaurant_name}}</h5>
+                      <img
+                        src="../static/images/burger_spot.jpg"
+                        alt="restaurant"
+                        width="200"
+                        height="200"
+                      />
+                      <p>serving burgers and fries</p>
+                      <p>{{restaurant.restaurant_street}}</p>
+                      <div style="display: flex; justify-content: space-between">
+                        <!-- <a href="">Leave a review</a>
+                        <a href="">Favorite</a> -->
+                        <!-- <a href="">Un-favorite</a> -->
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% else %}
+                <div>
+                  <h3>No restaurants by that category</h3>
+                </div>
+              {% endfor %}
+            {% elif session['category'] == null %}
+                {% for restaurant in restaurants %}
+                  <div class="restaurants_card">
+                    <a
+                      style="color: black; text-decoration: none"
+                      href="/restaurants/profile/{{restaurant.id}}"
+                    >
+                      <div id="restaurant">
+                        <h5>{{restaurant.restaurant_name}}</h5>
+                        <img
+                          src="../static/images/burger_spot.jpg"
+                          alt="restaurant"
+                          width="200"
+                          height="200"
+                        />
+                        <p>serving burgers and fries</p>
+                        <p>{{restaurant.restaurant_street}}</p>
+                        <div style="display: flex; justify-content: space-between">
+                          <!-- <a href="">Leave a review</a>
+                          <a href="">Favorite</a> -->
+                          <!-- <a href="">Un-favorite</a> -->
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
+            {% endif %}
+            
+          </div>
+
+          <div id="favorites" style="display: none">
+            {% for favorite in favorites %}
+            <div class="restaurants_card">
+              <div id="favorite">
+                <h5>{{favorite.restaurant_name}}</h5>
+                <img
+                  src="../static/images/burger_spot.jpg"
+                  alt="restaurant"
+                  width="200"
+                  height="200"
+                />
+                <p>serving burgers and fries</p>
+                <p>{{favorite.restaurant_street}}</p>
+                <a href="">Leave a review</a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <script>
+      let restaurant_card = document.getElementById("restaurants");
+      let favorites = document.getElementById("favorites");
+      function showFavorites() {
+        restaurant_card.style.display = "none";
+        favorites.style.display = "flex";
+      }
+      function showRestaurants() {
+        restaurant_card.style.display = "flex";
+        favorites.style.display = "none";
+      }
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

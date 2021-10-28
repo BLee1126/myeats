@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <title>My Eats</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1 class="text-left" style="color: white">My Eats</h1>
+      {{flash_error}}
+      <div class="forms">
+        <div class="reg_form">
+          <div class="error_message_reg">
+            {% if session['reg_submit'] == True %} {% with messages =
+            get_flashed_messages() %} {% if messages %} {% for message in
+            messages %}
+            <p class="error">{{message}}</p>
+            {% endfor %} {% endif %} {% endwith %} {% endif %}
+          </div>
+          <br />
+          <form class="form-signin mt-5" action="/users/create" method="POST">
+            <h2 class="mb-3 mx-2 fw-normal" style="color: white">Register</h2>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="First Name"
+                name="first_name"
+              />
+              <label for="floatingInput">First Name</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Last Name"
+                name="last_name"
+              />
+              <label for="floatingInput">Last Name</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Email Address"
+                name="email"
+              />
+              <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Password"
+                name="password"
+              />
+              <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="floatingInput"
+                placeholder="password"
+                name="password_confirm"
+              />
+              <label for="floatingPassword">Password Confirmation</label>
+            </div>
+            <br />
+            <button
+              class="w-100 btn btn-lg btn-primary my-1"
+              type="submit"
+              name="reg_btn"
+              value="register"
+            >
+              Register
+            </button>
+          </form>
+          <br>
+          <a href="/restaurants/register">Login/Register Your Restaurant</a>
+        </div>
+        <div class="login_form">
+          <br />
+          <div class="error_message_signin">
+            {% if session['login_submit'] == True %} {% with messages =
+            get_flashed_messages() %} {% if messages %} {% for message in
+            messages %}
+            <p class="error">{{message}}</p>
+            {% endfor %} {% endif %} {% endwith %} {% endif %}
+          </div>
+          <form class="form-signin mt-5" action="/login" method="POST">
+            <h2 class="mb-3 mx-2 fw-normal" style="color: white">Sign in</h2>
+            <div class="form-floating">
+              <input
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+                name="email"
+              />
+              <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Password"
+                name="password"
+              />
+              <label for="floatingPassword">Password</label>
+            </div>
+            <button
+              class="w-100 btn btn-lg btn-primary mt-1 mb-2"
+              type="submit"
+            >
+              Sign in
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
